@@ -1,7 +1,9 @@
 #!/usr/bin/python3
 from uuid import uuid4
 from datetime import datetime
+import storage
 """Defines a  BaseModel class"""
+
 
 class BaseModel:
     """Represent BaseModel"""
@@ -13,12 +15,13 @@ class BaseModel:
         self.updated_at = datetime.now()
 
     def __str__(self):
-       """Return string representation of object"""
-       return f"[{self.__class__.__name__}] ({self.id}) {self.__dict__}"
+        """Return string representation of object"""
+        return f"[{self.__class__.__name__}] ({self.id}) {self.__dict__}"
 
     def save(self):
         """Updates the public instance attribute updated_at"""
         self.updated_at = datetime.now()
+        storage.save()
 
     def to_dict(self) -> dict:
         """
