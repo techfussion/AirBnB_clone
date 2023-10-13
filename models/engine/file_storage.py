@@ -9,6 +9,7 @@ import os.path
 
 class FileStorage:
     """Representation/Blueprint of FileStorage"""
+
     __file_path = 'storage.json'
     __objects = dict()
 
