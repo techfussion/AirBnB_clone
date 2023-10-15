@@ -4,20 +4,9 @@ import cmd
 
 
 class HBNBCommand(cmd.Cmd):
-    """
-<<<<<<< HEAD
-    provides a prompt for user input, allowing users to execute 
+    """provides a prompt for user input, allowing users to execute 
     basic commands and exit the program.
-    
     """
-=======
-        provides a prompt for user input.
-        recieves and execute basic commands.
-        Exits the program on user temination.
-    """
-
-    intro = "Welcome to the HBNB shell. Type help to list commands.\n"
->>>>>>> cb7a27018b1be9175191a6af7a6e6bd1010a3c0d
     prompt = "(hbnb) "
 
     def do_quit(self, arg):
