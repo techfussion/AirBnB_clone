@@ -3,7 +3,11 @@
 import cmd
 
 class HBNBCommand(cmd.Cmd):
-    """provides a prompt for user input, allowing users to execute basic commands and exit the program."""
+    """
+    provides a prompt for user input, allowing users to execute 
+    basic commands and exit the program.
+    
+    """
     prompt = "(hbnb) "
 
     def do_quit(self, arg):
