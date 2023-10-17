@@ -14,16 +14,15 @@ class BaseModel:
             - *args: list of arguments
             - **kwargs: dict of key-values arguments
         """
-        if kwargs is not None and kwargs != {}:
-            for key in kwargs:
-                if key == "created_at":
-                    self.__dict__["created_at"] = datetime.strptime(
-                        kwargs["created_at"], "%Y-%m-%dT%H:%M:%S.%f")
-                elif key == "updated_at":
-                    self.__dict__["updated_at"] = datetime.strptime(
-                        kwargs["updated_at"], "%Y-%m-%dT%H:%M:%S.%f")
-                else:
-                    self.__dict__[key] = kwargs[key]
+        if kwargs:
+            for key, value in kwargs.items():
+                if key == 'created_at' or key == 'updated_at':
+                    setattr(self,
+                            key,
+                            datetime.strptime(value, '%Y-%m-%dT%H:%M:%S.%f'))
+
+                elif key != "__class__":
+                    setattr(self, key, value)
         else:
             self.id = str(uuid.uuid4())
             self.created_at = datetime.now()
@@ -32,7 +31,7 @@ class BaseModel:
 
     def __str__(self):
         """Return string representation of object"""
-        return f"[{self.__class__.__name__}] ({self.id}) {self.__dict__}"
+        return f"[{self.__class__.__name__}] ({self.id}) <{self.__dict__}>"
 
     def save(self):
         """Updates the public instance attribute updated_at"""
