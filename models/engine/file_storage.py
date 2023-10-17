@@ -11,7 +11,7 @@ class FileStorage:
     """Representation/Blueprint of FileStorage"""
 
     __file_path = 'storage.json'
-    __objects = dict()
+    __objects = {}
 
     def all(self) -> dict:
         """
@@ -27,15 +27,21 @@ class FileStorage:
             Args:
                 obj: the object/instance to store
         """
-        dict_rep = obj.to_dict()
-        self.__objects[f"{dict_rep['__class__']}.{dict_rep['id']}"] = obj
+        if obj:
+            key = '{}.{}'.format(obj.__class__.__name__, obj.id)
+            self.__objects[key] = obj
 
     def save(self):
         """
             Serializes __objects to the JSON file (path: __file_path)
         """
-        with open(self._FileStorage__file_path, "w") as write_stream:
-            json.dump(self._FileStorage__objects, write_stream)
+        dict_objects = {}
+
+        for key, obj in self.__objects.items():
+            dict_objects[key] = obj.to_dict()
+
+        with open(self.__file_path, 'w', encoding="UTF-8") as f:
+            json.dump(dict_objects, f)  # convert dict into json
 
     def reload(self):
         """Reload stored objects"""
